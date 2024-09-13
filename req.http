@@ -9,7 +9,16 @@ POST http://localhost:1808/order/create-new-order
 Content-Type: application/json
 
 {
-    "SID": "SID01",
+    "SID": "SID0",
     "reportName": "Order"
 }
 ###
+
+POST http://localhost:1808/order/update-order-form
+Content-Type: application/json
+
+{
+    "reportId": "66e40d498f3f7a11af0066a7",
+    "field": "customerName",
+    "value": "aramaco"
+}

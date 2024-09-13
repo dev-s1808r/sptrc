@@ -1,5 +1,6 @@
 const createNewOrder = require('../../../application/useCases/CreateOrder');
 const listAllOrders = require('../../../application/useCases/ListAllOrders');
+const updateOrderForm = require('../../../application/useCases/UpdateOrderForm');
 
 async function controlCreateNewOrder(req, res) {
 	let { SID } = req.body;
@@ -38,7 +39,39 @@ async function controlListAllOrders(req, res) {
 	}
 }
 
+async function controlUpdateOrderForm(req, res) {
+	const { reportId, field, value } = req.body;
+	if (!reportId) {
+		return res.status(400).json({
+			error: 'bad request',
+			message: 'reportId is missing',
+		});
+	}
+	if (!field) {
+		return res.status(400).json({
+			error: 'bad request',
+			message: 'field is missing',
+		});
+	}
+	if (!value) {
+		return res.status(400).json({
+			error: 'bad request',
+			message: 'value is missing',
+		});
+	}
+	try {
+		const result = await updateOrderForm.execute(reportId, field, value);
+		console.log(result);
+		return res.status(200).json({ body: result });
+		return result;
+	} catch (error) {
+		console.log('error from controller', error.message);
+		return res.status(500).json({ error: error.message });
+	}
+}
+
 module.exports = {
 	controlCreateNewOrder,
 	controlListAllOrders,
+	controlUpdateOrderForm,
 };

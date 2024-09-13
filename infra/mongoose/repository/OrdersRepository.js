@@ -55,6 +55,15 @@ class OrderRepository {
 		return titleArray;
 	}
 
+	validateKeyOnObject(object, key) {
+		console.log(object);
+		let prop = Object.keys(object.toObject());
+		if (prop.includes(key)) {
+			return true;
+		}
+		return false;
+	}
+
 	async createReportsForOrder(orderId) {
 		let reports = Object.keys(this.reports);
 		reports.shift();
@@ -84,7 +93,7 @@ class OrderRepository {
 		}
 	}
 
-	async AttachReportsOnOrder(orderId) {
+	async attachReportsOnOrder(orderId) {
 		try {
 			let order = await this.returnOrder(orderId);
 			if (!order) {
@@ -99,6 +108,24 @@ class OrderRepository {
 			return order;
 		} catch (error) {
 			this.throwError('while attaching reports: ', error);
+		}
+	}
+
+	async updateOrderForm(reportId, field, value) {
+		try {
+			let order = await this.returnOrder(reportId);
+			console.log('validating');
+			let isKey = this.validateKeyOnObject(order, field);
+			if (!isKey) {
+				throw new Error('invalid key submitted');
+			}
+			console.log('validation done');
+			order[field] = value;
+			let result = await order.save();
+			console.log('result', result, 'order:', order);
+			return result;
+		} catch (error) {
+			this.throwError('updating Order form', error);
 		}
 	}
 }

@@ -7,9 +7,6 @@ const DamageReportSchema = mongoose.Schema({
 	},
 });
 
-const DamageReportModel = mongoose.model(
-	'DamageReportModel',
-	DamageReportSchema
-);
+const DamageReport = mongoose.model('DamageReport', DamageReportSchema);
 
-module.exports = DamageReportModel;
+module.exports = DamageReport;

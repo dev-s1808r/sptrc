@@ -7,9 +7,9 @@ const NewBearingReportSchema = mongoose.Schema({
 	},
 });
 
-const NewBearingReportModel = mongoose.model(
-	'NewBearingReportModel',
+const NewBearingReport = mongoose.model(
+	'NewBearingReport',
 	NewBearingReportSchema
 );
 
-module.exports = NewBearingReportModel;
+module.exports = NewBearingReport;

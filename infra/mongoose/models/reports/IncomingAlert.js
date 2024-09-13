@@ -7,9 +7,6 @@ const IncomingAlertSchema = mongoose.Schema({
 	},
 });
 
-const IncomingAlertModel = mongoose.model(
-	'IncomingAlertModel',
-	IncomingAlertSchema
-);
+const IncomingAlert = mongoose.model('IncomingAlert', IncomingAlertSchema);
 
-module.exports = IncomingAlertModel;
+module.exports = IncomingAlert;

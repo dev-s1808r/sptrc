@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const FinalInspectionReportSchema = mongoose.Schema({
 	orderId: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Order',
+		ref: 'OrderModel',
 	},
 });
 
-const FinalInspectionReportModel = mongoose.model(
-	'FinalInspectionReportModel',
+const FinalInspectionReport = mongoose.model(
+	'FinalInspectionReport',
 	FinalInspectionReportSchema
 );
 
-module.exports = FinalInspectionReportModel;
+module.exports = FinalInspectionReport;

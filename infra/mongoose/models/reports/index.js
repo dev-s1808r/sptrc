@@ -1,23 +1,23 @@
-const CheckSheetModel = require('./CheckSheet');
-const DamageReportModel = require('./DamageReport');
-const ElectricalTestReportModel = require('./ElectricalTestReport');
-const FinalInspectionReportModel = require('./FinalInspectionReport');
-const IncomingAlertModel = require('./IncomingAlert');
-const InspectionReportModel = require('./InspectionReport');
-const NewBearingReportModel = require('./NewBearingReport');
-const OldBearingReportModel = require('./OldBearingReport');
-const OrderModel = require('./Order');
-const TestingBalancingReportModel = require('./TestingBalancingReport');
+const CheckSheet = require('./CheckSheet');
+const DamageReport = require('./DamageReport');
+const ElectricalTestReport = require('./ElectricalTestReport');
+const FinalInspectionReport = require('./FinalInspectionReport');
+const IncomingAlert = require('./IncomingAlert');
+const InspectionReport = require('./InspectionReport');
+const NewBearingReport = require('./NewBearingReport');
+const OldBearingReport = require('./OldBearingReport');
+const Order = require('./Order');
+const TestingBalancingReport = require('./TestingBalancingReport');
 
 module.exports = {
-	OrderModel,
-	IncomingAlertModel,
-	CheckSheetModel,
-	DamageReportModel,
-	InspectionReportModel,
-	OldBearingReportModel,
-	NewBearingReportModel,
-	ElectricalTestReportModel,
-	FinalInspectionReportModel,
-	TestingBalancingReportModel,
+	Order,
+	IncomingAlert,
+	CheckSheet,
+	DamageReport,
+	InspectionReport,
+	OldBearingReport,
+	NewBearingReport,
+	ElectricalTestReport,
+	FinalInspectionReport,
+	TestingBalancingReport,
 };

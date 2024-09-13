@@ -7,9 +7,9 @@ const TestingBalancingReportSchema = mongoose.Schema({
 	},
 });
 
-const TestingBalancingReportModel = mongoose.model(
-	'TestingBalancingReportModel',
+const TestingBalancingReport = mongoose.model(
+	'TestingBalancingReport',
 	TestingBalancingReportSchema
 );
 
-module.exports = TestingBalancingReportModel;
+module.exports = TestingBalancingReport;

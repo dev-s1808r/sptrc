@@ -11,9 +11,11 @@ class CreateNewOrder {
 			if (isOrder) {
 				throw new Error(`${isOrder} order already exists`);
 			}
-			const result = await this.repository.createNewOrder(reportName, SID);
-			console.log(result);
-			return result;
+			const order = await this.repository.createNewOrder(reportName, SID);
+			const orderReport = await this.repository.AttachReportsOnOrder(order._id);
+
+			console.log(orderReport);
+			return orderReport;
 		} catch (error) {
 			console.log(error.message);
 			throw error;

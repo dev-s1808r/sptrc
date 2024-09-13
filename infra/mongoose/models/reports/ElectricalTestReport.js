@@ -7,9 +7,9 @@ const ElectricalTestReportSchema = mongoose.Schema({
 	},
 });
 
-const ElectricalTestReportModel = mongoose.model(
-	'ElectricalTestReportModel',
+const ElectricalTestReport = mongoose.model(
+	'ElectricalTestReport',
 	ElectricalTestReportSchema
 );
 
-module.exports = ElectricalTestReportModel;
+module.exports = ElectricalTestReport;

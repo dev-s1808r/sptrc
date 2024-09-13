@@ -7,6 +7,6 @@ const CheckSheetSchema = mongoose.Schema({
 	},
 });
 
-const CheckSheetModel = mongoose.model('CheckSheetModel', CheckSheetSchema);
+const CheckSheet = mongoose.model('CheckSheet', CheckSheetSchema);
 
-module.exports = CheckSheetModel;
+module.exports = CheckSheet;

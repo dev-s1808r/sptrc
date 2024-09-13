@@ -7,9 +7,9 @@ const OldBearingReportSchema = mongoose.Schema({
 	},
 });
 
-const OldBearingReportModel = mongoose.model(
+const OldBearingReport = mongoose.model(
 	'OldBearingReportModel',
 	OldBearingReportSchema
 );
 
-module.exports = OldBearingReportModel;
+module.exports = OldBearingReport;

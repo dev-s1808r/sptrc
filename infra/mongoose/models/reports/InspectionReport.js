@@ -7,9 +7,9 @@ const InspectionReportSchema = mongoose.Schema({
 	},
 });
 
-const InspectionReportModel = mongoose.model(
-	'InspectionReportModel',
+const InspectionReport = mongoose.model(
+	'InspectionReport',
 	InspectionReportSchema
 );
 
-module.exports = InspectionReportModel;
+module.exports = InspectionReport;

@@ -1,0 +1,15 @@
+
+GET  http://localhost:1808
+###
+
+GET  http://localhost:1808/order/list-all-orders
+###
+
+POST http://localhost:1808/order/create-new-order
+Content-Type: application/json
+
+{
+    "SID": "SID01",
+    "reportName": "OrderModel"
+}
+###

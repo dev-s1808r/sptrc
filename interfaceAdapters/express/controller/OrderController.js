@@ -1,5 +1,6 @@
 const createNewOrder = require('../../../application/useCases/CreateOrder');
 const listAllOrders = require('../../../application/useCases/ListAllOrders');
+const retrieveReport = require('../../../application/useCases/RetrieveReport');
 const updateOrderForm = require('../../../application/useCases/UpdateOrderForm');
 
 async function controlCreateNewOrder(req, res) {
@@ -63,7 +64,46 @@ async function controlUpdateOrderForm(req, res) {
 		const result = await updateOrderForm.execute(reportId, field, value);
 		console.log(result);
 		return res.status(200).json({ body: result });
-		return result;
+	} catch (error) {
+		console.log('error from controller', error.message);
+		return res.status(500).json({ error: error.message });
+	}
+}
+
+async function controlRetrieveReport(req, res) {
+	const { reportName, reportId, orderId } = req.body;
+	if (!reportName) {
+		return res.status(400).json({
+			error: 'bad request',
+			message: 'reportName is missing',
+		});
+	}
+	if (!reportId) {
+		return res.status(400).json({
+			error: 'bad request',
+			message: 'reportId is missing',
+		});
+	}
+	if (!orderId) {
+		return res.status(400).json({
+			error: 'bad request',
+			message: 'orderId is missing',
+		});
+	}
+	try {
+		const result = await retrieveReport.execute({
+			reportId,
+			reportName,
+			orderId,
+		});
+		console.log(result);
+		if (!result) {
+			return res.status(400).json({
+				error: 'bad request',
+				message: 'order and report mismatch',
+			});
+		}
+		return res.status(200).json({ body: result });
 	} catch (error) {
 		console.log('error from controller', error.message);
 		return res.status(500).json({ error: error.message });
@@ -74,4 +114,5 @@ module.exports = {
 	controlCreateNewOrder,
 	controlListAllOrders,
 	controlUpdateOrderForm,
+	controlRetrieveReport,
 };

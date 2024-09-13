@@ -10,6 +10,21 @@ class OrderRepository {
 		throw new Error(`Error occurred while ${action}: `, error.message);
 	}
 
+	returnReportTitles() {
+		const titleArray = Object.keys(this.reports);
+		console.log(titleArray, 'title array from repo function');
+		return titleArray;
+	}
+
+	validateKeyOnObject(object, key) {
+		console.log(object);
+		let prop = Object.keys(object.toObject());
+		if (prop.includes(key)) {
+			return true;
+		}
+		return false;
+	}
+
 	async returnOrder(orderId) {
 		try {
 			const Order = await reports['Order'].findById(orderId);
@@ -47,21 +62,6 @@ class OrderRepository {
 			console.log(error);
 			this.throwError('finding all orders: ', error);
 		}
-	}
-
-	returnReportTitles() {
-		const titleArray = Object.keys(this.reports);
-		console.log(titleArray, 'title array from repo function');
-		return titleArray;
-	}
-
-	validateKeyOnObject(object, key) {
-		console.log(object);
-		let prop = Object.keys(object.toObject());
-		if (prop.includes(key)) {
-			return true;
-		}
-		return false;
 	}
 
 	async createReportsForOrder(orderId) {
@@ -126,6 +126,21 @@ class OrderRepository {
 			return result;
 		} catch (error) {
 			this.throwError('updating Order form', error);
+		}
+	}
+
+	async retrieveReport({ reportId, reportName, orderId }) {
+		console.log(reportId, reportName, orderId, 'from retrieve report repo');
+		try {
+			let report = await this.reports[reportName].findById(reportId);
+			console.log(report.orderId);
+			console.log(orderId);
+			if (report.orderId != orderId) {
+				return null;
+			}
+			return report;
+		} catch (error) {
+			this.throwError('retrieving report', error);
 		}
 	}
 }

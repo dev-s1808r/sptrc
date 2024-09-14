@@ -2,6 +2,7 @@ const createNewOrder = require('../../../application/useCases/CreateOrder');
 const listAllOrders = require('../../../application/useCases/ListAllOrders');
 const retrieveReport = require('../../../application/useCases/RetrieveReport');
 const updateOrderForm = require('../../../application/useCases/UpdateOrderForm');
+const updateReportValue = require('../../../application/useCases/UpdateReportValue');
 
 async function controlCreateNewOrder(req, res) {
 	let { SID } = req.body;
@@ -62,6 +63,12 @@ async function controlUpdateOrderForm(req, res) {
 	}
 	try {
 		const result = await updateOrderForm.execute(reportId, field, value);
+		if (result === 1) {
+			return res.status(400).json({
+				error: 'bad request',
+				message: 'invalid key submitted',
+			});
+		}
 		console.log(result);
 		return res.status(200).json({ body: result });
 	} catch (error) {
@@ -110,9 +117,33 @@ async function controlRetrieveReport(req, res) {
 	}
 }
 
+async function controlUpdateReportValue(req, res) {
+	const { reportId, reportName, orderId, field, value } = req.body;
+	try {
+		let result = await updateReportValue.execute({
+			reportId,
+			reportName,
+			orderId,
+			field,
+			value,
+		});
+		if (!result) {
+			return res.status(400).json({
+				error: 'bad request',
+				message: 'order and report mismatch',
+			});
+		}
+		return res.status(200).json({ body: result });
+	} catch (error) {
+		console.log('error from controller', error.message);
+		return res.status(500).json({ error: error.message });
+	}
+}
+
 module.exports = {
 	controlCreateNewOrder,
 	controlListAllOrders,
 	controlUpdateOrderForm,
 	controlRetrieveReport,
+	controlUpdateReportValue,
 };

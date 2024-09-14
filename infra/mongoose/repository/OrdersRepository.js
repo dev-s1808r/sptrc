@@ -7,7 +7,7 @@ class OrderRepository {
 
 	throwError(action, error) {
 		console.log(error.message);
-		throw new Error(`Error occurred while ${action}: `, error.message);
+		throw new Error(`Error occurred while ${action}: ${error.message}`);
 	}
 
 	returnReportTitles() {
@@ -17,7 +17,7 @@ class OrderRepository {
 	}
 
 	validateKeyOnObject(object, key) {
-		console.log(object);
+		console.log(object.toObject());
 		let prop = Object.keys(object.toObject());
 		if (prop.includes(key)) {
 			return true;
@@ -117,7 +117,8 @@ class OrderRepository {
 			console.log('validating');
 			let isKey = this.validateKeyOnObject(order, field);
 			if (!isKey) {
-				throw new Error('invalid key submitted');
+				return (order = 1);
+				// throw new Error('invalid key submitted');
 			}
 			console.log('validation done');
 			order[field] = value;
@@ -141,6 +142,23 @@ class OrderRepository {
 			return report;
 		} catch (error) {
 			this.throwError('retrieving report', error);
+		}
+	}
+
+	async updateReportValue({ reportId, reportName, orderId, field, value }) {
+		try {
+			let report = await this.retrieveReport({ reportId, reportName, orderId });
+			if (!report) {
+				return null;
+			}
+			console.log(field, value, 'from update report controller');
+			// console.log(this.validateKeyOnObject(report, field));
+			report[field] = value;
+			let result = await report.save();
+			console.log(result);
+			return result;
+		} catch (error) {
+			this.throwError('updating report value', error);
 		}
 	}
 }

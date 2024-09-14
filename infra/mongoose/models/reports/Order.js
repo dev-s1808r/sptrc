@@ -41,8 +41,9 @@ const OrderSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'TestingBalancingReportId',
 	},
-	customerName: {
+	qrCodeUrl: {
 		type: String,
+		unique: true,
 		default: null,
 	},
 });

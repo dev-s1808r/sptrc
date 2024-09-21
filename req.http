@@ -5,33 +5,14 @@ GET  http://localhost:1808
 GET  http://localhost:1808/order/list-all-orders
 ###
 
+GET  http://localhost:1808/order/list-all-orders?f=sid&v=SID01
+###
+
 POST http://localhost:1808/order/create-new-order
 Content-Type: application/json
 
 {
-    "SID": "SID02",
-    "reportName": "Order"
-}
-###
-
-POST http://localhost:1808/order/update-order-form
-Content-Type: application/json
-
-{
-    "reportId": "66e532935a417d8349c19b39",
-    "field": "qrCodeUrl",
-    "value": "sourabhraghavendra.in"
-}
-
-###
-
-POST http://localhost:1808/order/retrieve-order
-Content-Type: application/json
-
-{
-    "orderId": "66e532935a417d834c19b39",
-    "reportId": "66e532935a417d8349c19b3c",
-    "reportName": "IncomingAlert"
+    "SID": "SID04"
 }
 
 ###
@@ -40,9 +21,22 @@ POST http://localhost:1808/order/update-report-value
 Content-Type: application/json
 
 {
-    "orderId": "66e532935a417d8349c19b39",
-    "reportId": "66e532935a417d8349c19b3c",
+    "sid":"SID01",
+    "orderId": "66ee68340fa734cac4084027",
+    "reportId": "66ee68340fa734cac4084029",
     "reportName": "IncomingAlert",
-    "field": "salesApproval",
-    "value": "true"
+    "field": "customerName",
+    "value": "formaldehyde boron"
+}
+
+###
+
+GET http://localhost:1808/order/retrieve-report
+Content-Type: application/json
+
+{
+    "sid":"SID01",
+    "orderId": "66ee68340fa734cac4084027",
+    "reportId": "66ee68340fa734cac4084029",
+    "reportName": "IncomingAlert"
 }

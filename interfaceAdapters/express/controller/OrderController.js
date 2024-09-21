@@ -1,28 +1,23 @@
+const { query } = require('express');
 const createNewOrder = require('../../../application/useCases/CreateOrder');
-const listAllOrders = require('../../../application/useCases/ListAllOrders');
+const { listOrder } = require('../../../application/useCases/ListAllOrders');
 const retrieveReport = require('../../../application/useCases/RetrieveReport');
 const updateOrderForm = require('../../../application/useCases/UpdateOrderForm');
 const updateReportValue = require('../../../application/useCases/UpdateReportValue');
 
 async function controlCreateNewOrder(req, res) {
 	let { SID } = req.body;
-	let { reportName } = req.body;
 	if (!SID) {
 		return res.status(400).json({
 			error: 'bad request',
 			message: 'SID is missing',
 		});
 	}
-	if (!reportName) {
-		return res.status(400).json({
-			error: 'bad request',
-			message: 'Report Name is missing',
-		});
-	}
+
 	try {
-		const result = await createNewOrder.execute(SID, reportName);
-		console.log(result, 'from controller');
-		res.status(200).json({ body: result });
+		const result = await createNewOrder.execute(SID);
+		let out = { body: result, message: 'Order created' };
+		res.status(200).json(out);
 		return result;
 	} catch (error) {
 		console.log('error from controller', error.message);
@@ -31,9 +26,9 @@ async function controlCreateNewOrder(req, res) {
 }
 
 async function controlListAllOrders(req, res) {
+	const { f, v } = req.query;
 	try {
-		const result = await listAllOrders.execute();
-		console.log(result, 'from controller');
+		const result = await listOrder.execute({ f, v });
 		res.status(200).json({ body: result });
 	} catch (error) {
 		console.log('Error from controller', error.message);
@@ -78,7 +73,7 @@ async function controlUpdateOrderForm(req, res) {
 }
 
 async function controlRetrieveReport(req, res) {
-	const { reportName, reportId, orderId } = req.body;
+	const { reportName, reportId, orderId, sid } = req.body;
 	if (!reportName) {
 		return res.status(400).json({
 			error: 'bad request',
@@ -102,6 +97,7 @@ async function controlRetrieveReport(req, res) {
 			reportId,
 			reportName,
 			orderId,
+			sid,
 		});
 		console.log(result);
 		if (!result) {
@@ -118,9 +114,10 @@ async function controlRetrieveReport(req, res) {
 }
 
 async function controlUpdateReportValue(req, res) {
-	const { reportId, reportName, orderId, field, value } = req.body;
+	const { sid, orderId, reportId, reportName, field, value } = req.body;
 	try {
 		let result = await updateReportValue.execute({
+			sid,
 			reportId,
 			reportName,
 			orderId,

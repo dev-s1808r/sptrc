@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ElectricalTestReportSchema = mongoose.Schema({
+const ElectricalTestSchema = mongoose.Schema({
 	orderId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Order',
@@ -9,7 +9,7 @@ const ElectricalTestReportSchema = mongoose.Schema({
 
 const ElectricalTestReport = mongoose.model(
 	'ElectricalTestReport',
-	ElectricalTestReportSchema
+	ElectricalTestSchema
 );
 
 module.exports = ElectricalTestReport;

@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-const InspectionReportSchema = mongoose.Schema({
+const InProcessInspectionSchema = mongoose.Schema({
 	orderId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Order',
 	},
 });
 
-const InspectionReport = mongoose.model(
-	'InspectionReport',
-	InspectionReportSchema
+const InProcessInspectionReport = mongoose.model(
+	'InProcessInspectionReport',
+	InProcessInspectionSchema
 );
 
-module.exports = InspectionReport;
+module.exports = InProcessInspectionReport;

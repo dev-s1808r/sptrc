@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
 
-const NewBearingReportSchema = mongoose.Schema({
+const NewBearingSchema = mongoose.Schema({
 	orderId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Order',
 	},
 });
 
-const NewBearingReport = mongoose.model(
-	'NewBearingReport',
-	NewBearingReportSchema
-);
+const NewBearingReport = mongoose.model('NewBearingReport', NewBearingSchema);
 
 module.exports = NewBearingReport;

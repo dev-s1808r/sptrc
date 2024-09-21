@@ -63,11 +63,11 @@ const IncomingAlertSchema = mongoose.Schema({
 		default: 'beltDriven',
 	},
 	salesApproval: {
-		type: String,
+		type: Boolean,
 		default: false,
 	},
 	financeApproval: {
-		type: String,
+		type: Boolean,
 		default: false,
 	},
 });

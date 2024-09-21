@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TestingBalancingReportSchema = mongoose.Schema({
+const TestingBalancingSchema = mongoose.Schema({
 	orderId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Order',
@@ -9,7 +9,7 @@ const TestingBalancingReportSchema = mongoose.Schema({
 
 const TestingBalancingReport = mongoose.model(
 	'TestingBalancingReport',
-	TestingBalancingReportSchema
+	TestingBalancingSchema
 );
 
 module.exports = TestingBalancingReport;

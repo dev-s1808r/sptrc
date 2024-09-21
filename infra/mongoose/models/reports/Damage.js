@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const DamageReportSchema = mongoose.Schema({
+const DamageSchema = mongoose.Schema({
 	orderId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Order',
 	},
 });
 
-const DamageReport = mongoose.model('DamageReport', DamageReportSchema);
+const DamageReport = mongoose.model('DamageReport', DamageSchema);
 
 module.exports = DamageReport;
